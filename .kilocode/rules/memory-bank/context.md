@@ -12,7 +12,7 @@
 - Шаблонизация: Twig через TwigRenderService (шаблоны в files/templates)
 - Контроллеры: MainPageController и ControllerAbstract
 - Репозитории: CategoryRepository и RecordRepository
-- Сервисы: FillFnForDbService и TwigRenderService
+- Сервисы: FillFnForDbService, TwigRenderService и BlockProcessingService
 
 ## Recent Analysis
 - Изучена структура проекта и основные файлы
@@ -23,6 +23,9 @@
 - Добавлен контроллер MainPageController для обработки главной страницы
 - Реализованы репозитории для работы с категориями и записями
 - Добавлены специфичные функции для SQLite (CRC_32, UNIX_MS)
+- Добавлен сервис BlockProcessingService для обработки JSON-контента из Editor.js
+- Добавлены шаблоны для различных типов блоков контента (заголовки, параграфы, цитаты и др.)
+- Реализована система маршрутизации (Route.php)
 
 ## Next Steps
 - Реализовать функционал для работы с контроллерами и репозиториями
