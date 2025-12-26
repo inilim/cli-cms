@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Inilim\Tool\VD;
 use Inilim\Tool\Str;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -29,13 +30,6 @@ final class TwigRenderService
 
     function render(string $name, array $context = []): string
     {
-        if (\str_ends_with($name, '.twig')) {
-            $name = Str::beforeLast($name, '.twig');
-        }
-        $name = \strtr($name, [
-            '.'  => '/',
-            '\\' => '/',
-        ]);
         $name = Str::finish($name, '.twig');
         return $this->twig->render($name, $context);
     }

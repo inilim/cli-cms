@@ -6,6 +6,9 @@ use App\Logger;
 use Inilim\DI\Bind;
 use Inilim\Env\Env;
 
+/**
+ * Bind основных классов
+ */
 final class Main
 {
     function __invoke(): void
@@ -17,7 +20,7 @@ final class Main
         $bind->singleton(Logger::class, static function () use ($config) {
             return new Logger($config->getStr('log_file'));
         })
-            ->$bind->singletonList([
+            ->singletonList([
                 \App\Service\TwigRenderService::class,
             ]);
     }

@@ -11,7 +11,7 @@ abstract class RepositoryAbstract
 
     function __construct()
     {
-        // 
+        $this->initDbFunctions();
     }
 
     function execExists(string $sql, array $values = []): bool
