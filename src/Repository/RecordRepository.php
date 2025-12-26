@@ -3,9 +3,9 @@
 namespace App\Repository;
 
 use Inilim\Tool\Time;
+use Inilim\Tool\Assert;
 use Inilim\IPDO\IPDOSQLite;
 use App\Repository\RepositoryAbstract;
-use Inilim\Tool\Assert;
 
 // use @psalm-import-type Record from \App\Repository\RecordRepository
 
