@@ -1,0 +1,36 @@
+{% if items and style %}
+    {% if style == 'ordered' %}
+        <ol type="{{ meta.counterType|default('1') }}">
+    {% else %}
+        <ul>
+    {% endif %}
+    
+    {% for item in items %}
+        <li>
+            {{ item.content|raw }}
+            {% if item.items|length > 0 %}
+                {% if style == 'ordered' %}
+                    <ol type="{{ meta.counterType|default('1') }}">
+                {% else %}
+                    <ul>
+                {% endif %}
+                
+                {% for subitem in item.items %}
+                    <li>{{ subitem.content|raw }}</li>
+                {% endfor %}
+                
+                {% if style == 'ordered' %}
+                    </ol>
+                {% else %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+    
+    {% if style == 'ordered' %}
+        </ol>
+    {% else %}
+        </ul>
+    {% endif %}
+{% endif %}

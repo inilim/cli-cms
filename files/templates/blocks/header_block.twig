@@ -1,0 +1,17 @@
+{% if text and level %}
+    {% if level == 1 %}
+        <h1>{{ text|raw }}</h1>
+    {% elseif level == 2 %}
+        <h2>{{ text|raw }}</h2>
+    {% elseif level == 3 %}
+        <h3>{{ text|raw }}</h3>
+    {% elseif level == 4 %}
+        <h4>{{ text|raw }}</h4>
+    {% elseif level == 5 %}
+        <h5>{{ text|raw }}</h5>
+    {% elseif level == 6 %}
+        <h6>{{ text|raw }}</h6>
+    {% else %}
+        <h2>{{ text|raw }}</h2>
+    {% endif %}
+{% endif %}

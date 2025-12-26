@@ -1,0 +1,8 @@
+{% if text %}
+    <blockquote cite="{{ caption|default('') }}" align="{{ alignment|default('left') }}">
+        {{ text|raw }}
+        {% if caption %}
+            <footer>&mdash; {{ caption|raw }}</footer>
+        {% endif %}
+    </blockquote>
+{% endif %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CLI-CMS - Главная страница</title>
+    <meta charset="UTF-8">
+    {% include 'styles/normalize_css.twig' %}
+    {% include 'styles/main_page_styles.twig' %}
+</head>
+<body>
+    {% if records %}
+        {% for record in records %}
+            <div class="record" data-id="record-{{ record.id }}">
+                {% for block in record.blocks %}
+                    <div class="block block-{{ block.type }}" data-id="block-{{ block.id }}">
+                        {% include block.template ~ '.twig' with block.data %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Записей пока нет.</p>
+    {% endif %}
+</body>
+</html>

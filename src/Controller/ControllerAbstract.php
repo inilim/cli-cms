@@ -2,7 +2,4 @@
 
 namespace App\Controller;
 
-abstract class ControllerAbstract
-{
-    // TODO
-}
+abstract class ControllerAbstract {}
