@@ -45,7 +45,7 @@ CLI-CMS использует архитектурный подход, близк
 
 ## Database Layer
 - Используется SQLite через кастомную обертку `IPDOSQLite`
-- База данных находится в `files/db/records.sqlite`
+- База данных находится в `files/db/base.sqlite`
 - Поддержка специфичных функций SQLite (CRC_32, UNIX_MS)
 
 ## Template Layer
