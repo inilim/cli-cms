@@ -12,7 +12,6 @@ use App\Repository\RepositoryAbstract;
 final class RecordRepository extends RepositoryAbstract
 {
     /**
-     * @return ?RecordEntity
      */
     function findByID(string $id): ?RecordEntity
     {
