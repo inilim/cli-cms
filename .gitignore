@@ -4,6 +4,10 @@
 /composer.lock
 /files/logs.log
 
+# ext
+
+*.sqlite
+
 # dirs
 
 /vendor
