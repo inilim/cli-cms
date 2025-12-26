@@ -2,6 +2,7 @@
 
 /config.php
 /composer.lock
+/files/logs.log
 
 # dirs
 

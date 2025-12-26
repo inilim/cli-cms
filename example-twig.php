@@ -1,5 +1,7 @@
 <?php
 
+use Inilim\Tool\VD;
+
 // Пример использования Twig в CLI-CMS
 
 require_once __DIR__ . '/boot.php';
