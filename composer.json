@@ -1,0 +1,22 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files": []
+    },
+    "require": {
+        "inilim/tools": "dev-main",
+        "inilim/ipdo": "dev-main",
+        "inilim/env": "dev-main",
+        "inilim/di": "dev-main",
+        "twig/twig": "^3.22"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "8.4"
+        }
+    }
+}
