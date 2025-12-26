@@ -6,12 +6,12 @@
 
 ### Функция `DI()`
 - Используется для получения экземпляра класса из DI-контейнера
-- Пример: `DI(ClassName::class)`
+- Пример: `\DI(ClassName::class)`
 - Является наиболее лаконичным способом получения зависимостей
 
 ### Функция `DITag()`
 - Используется для получения экземпляра по тегу из DI-контейнера
-- Пример: `DITag('config')`
+- Пример: `\DITag('config')`
 - Подходит для получения объектов, зарегистрированных с тегами
 
 ### Через объект DI::self()
@@ -22,13 +22,13 @@
 
 ### В контроллерах:
 ```php
-$recordRepository = DI(RecordRepository::class);
-$twigRenderService = DI(TwigRenderService::class);
+$recordRepository = \DI(RecordRepository::class);
+$twigRenderService = \DI(TwigRenderService::class);
 ```
 
 ### При работе с тегами:
 ```php
-$config = DITag('config');
+$config = \DITag('config');
 ```
 
 ## Преимущества использования глобальных функций
