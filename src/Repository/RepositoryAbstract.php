@@ -14,7 +14,7 @@ abstract class RepositoryAbstract
         $this->connect = \DITag('db');
     }
 
-    function execExists(string $sql, array $values = []): bool
+    protected function execExists(string $sql, array $values = []): bool
     {
         $sql = \sprintf('SELECT exists (%s) as ex', $sql);
         $exists = $this->connect->exec($sql, $values, 1)['ex'] ?? '0';

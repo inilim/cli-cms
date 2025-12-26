@@ -8,11 +8,11 @@ namespace App\Entity;
 final class CategoryEntity
 {
     /**
-     * @param int $id Уникальный идентификатор категории
+     * @param ?int $id Уникальный идентификатор категории
      * @param string $name Название категории
      */
     function __construct(
-        protected(set) int $id,
+        protected(set) ?int $id,
         protected(set) string $name,
     ) {}
 
