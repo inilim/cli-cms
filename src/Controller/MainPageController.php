@@ -8,7 +8,6 @@ use App\Service\TwigRenderService;
 use App\Repository\RecordRepository;
 
 /**
- * @psalm-import-type Record from \App\Repository\RecordRepository
  */
 final class MainPageController extends \App\Controller\ControllerAbstract
 {
@@ -19,18 +18,18 @@ final class MainPageController extends \App\Controller\ControllerAbstract
         $twigRenderService = \DI(TwigRenderService::class);
         $blockProcessingService = \DI(BlockProcessingService::class);
 
-        // Получаем записи для главной страницы
+        // Получаем записи для главной страницы как сущности
         $records = $recordRepository->getForMainPage();
 
         // Обрабатываем каждую запись, преобразуя JSON-тело в структурированные данные
         $processedRecords = [];
         foreach ($records as $record) {
-            $processedBlocks = $blockProcessingService->processBody($record['body']);
+            $processedBlocks = $blockProcessingService->processBody($record->body);
             $processedRecords[] = [
-                'id'            => $record['id'],
-                'category_id'   => $record['category_id'],
+                'id'            => $record->id,
+                'category_id'   => $record->categoryId,
                 'blocks'        => $processedBlocks,
-                'created_at_ms' => $record['created_at_ms']
+                'created_at_ms' => $record->createdAtMs
             ];
         }
 

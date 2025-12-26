@@ -28,6 +28,10 @@ CLI-CMS использует архитектурный подход, близк
 - Шаблоны хранятся в директории `files/templates`
 - Используется Twig 3.x в качестве шаблонизатора
 
+### Entity Layer
+- `src/Entity/RecordEntity.php` - сущность для представления записи из репозитория RecordRepository
+- Содержит поля: id, categoryId, body, createdAtMs
+
 ### Repository Pattern
 - `src/Repository/RepositoryAbstract.php` - абстрактный класс для репозиториев
 - `src/Repository/RecordRepository.php` - пример конкретной реализации
@@ -51,6 +55,7 @@ CLI-CMS использует архитектурный подход, близк
 - `src/` - основной каталог с исходным кодом
 - `src/Bind/` - компоненты привязки (связывания зависимостей)
 - `src/Controller/` - контроллеры приложения
+- `src/Entity/` - сущности приложения
 - `src/Enum/` - перечисления (пустая директория на данный момент)
 - `src/Exception/` - исключения (пустая директория на данный момент)
 - `src/Repository/` - репозитории для работы с данными

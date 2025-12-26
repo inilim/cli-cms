@@ -4,27 +4,25 @@ namespace App\Repository;
 
 use Inilim\Tool\Time;
 use Inilim\Tool\Assert;
+use App\Entity\RecordEntity;
 use App\Repository\RepositoryAbstract;
 
-// use @psalm-import-type Record from \App\Repository\RecordRepository
-
 /**
- * @psalm-type Record = array{id:string,category_id:int,body:string,created_at_ms:int}
  */
 final class RecordRepository extends RepositoryAbstract
 {
     /**
-     * @return ?Record
+     * @return ?RecordEntity
      */
-    function findByID(string $id): ?array
+    function findByID(string $id): ?RecordEntity
     {
         $sql = 'SELECT * FROM records WHERE id = {id}';
         $record = $this->connect->exec($sql, ['id' => $id], 1);
-        return $record ? $record : null;
+        return $record ? RecordEntity::fromArray($record) : null;
     }
 
     /**
-     * @return Record[]
+     * @return RecordEntity[]
      */
     function getForMainPage(int $limit = 10, int $offset = 0): array
     {
@@ -36,10 +34,12 @@ final class RecordRepository extends RepositoryAbstract
             ORDER BY created_at_ms DESC
             LIMIT {offset},{limit}';
 
-        return $this->connect->exec($sql, [
+        $records = $this->connect->exec($sql, [
             'limit'      => $limit,
             'offset'     => $offset,
             'current_ms' => Time::unixMs(),
         ], 2);
+
+        return \array_map(RecordEntity::fromArray(...), $records);
     }
 }
