@@ -18,7 +18,7 @@ final class Main
             return new Logger($config->getStr('log_file'));
         })
             ->$bind->singletonList([
-                // 
+                \App\Service\TwigRenderService::class,
             ]);
     }
 }
