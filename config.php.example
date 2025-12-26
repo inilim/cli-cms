@@ -1,0 +1,7 @@
+<?php
+
+return [
+    'root'     => $r = __DIR__,
+    'log_file' => $r . '/files/logs.log',
+    'db_dir'   => $r . '/files/db',
+];
