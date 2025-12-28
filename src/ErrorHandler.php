@@ -99,6 +99,9 @@ final class ErrorHandler
         throw $e;
     }
 
+    /**
+     * @param array<mixed> $data
+     */
     protected function logger(string $name, array $data): void
     {
         $data = [

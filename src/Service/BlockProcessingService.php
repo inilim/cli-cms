@@ -21,9 +21,9 @@ final class BlockProcessingService
         $processedBlocks = [];
         foreach ($blocks as $block) {
             $processedBlock = [
-                'id'   => $block['id'] ?? '',
-                'type' => $block['type'] ?? '',
-                'data' => $block['data'] ?? []
+                'id'   => $block['id'],
+                'type' => $block['type'],
+                'data' => $block['data']
             ];
 
             // В зависимости от типа блока, определяем соответствующий шаблон
@@ -67,10 +67,13 @@ final class BlockProcessingService
     {
         $decodedBody = \json_decode($body, true);
 
-        if (!$decodedBody || !isset($decodedBody['blocks'])) {
+        if (!\is_array($decodedBody) || !\is_array($decodedBody['blocks'] ?? null)) {
             return [];
         }
 
-        return $this->processBlocks($decodedBody['blocks']);
+        /** @var array<array{id: string, type: string, data: array<string, mixed>}> $blocks */
+        $blocks = $decodedBody['blocks'];
+
+        return $this->processBlocks($blocks);
     }
 }

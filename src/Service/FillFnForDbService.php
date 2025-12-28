@@ -21,7 +21,11 @@ final class FillFnForDbService
             throw new AppException();
         }
         // INFO CRC_32 возвращаем как строку, а то sqlite плохо воспринимает большие числа
-        $pdo->sqliteCreateFunction('CRC_32', static fn($value): string => (string)\crc32((string)$value), 1);
-        $pdo->sqliteCreateFunction('UNIX_MS', Time::__asClosure('unixMs'), 0);
+        $pdo->sqliteCreateFunction('CRC_32', static function ($value): string {
+            return (string)\crc32((string)$value);
+        }, 1);
+        $cls = Time::__asClosure('unixMs');
+        /** @var \Closure $cls */
+        $pdo->sqliteCreateFunction('UNIX_MS', $cls, 0);
     }
 }

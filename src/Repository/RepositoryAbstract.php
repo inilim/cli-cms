@@ -16,9 +16,13 @@ abstract class RepositoryAbstract
         if ($connect === null) {
             throw new AppException('Database connection is not available');
         }
+        /** @var IPDOSQLite $connect */
         $this->connect = $connect;
     }
 
+    /**
+     * @param array<array-key, bool|float|int|string> $values
+     */
     protected function execExists(string $sql, array $values = []): bool
     {
         $sql = \sprintf('SELECT exists (%s) as ex', $sql);

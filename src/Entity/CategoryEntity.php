@@ -16,6 +16,9 @@ final class CategoryEntity
         protected(set) string $name,
     ) {}
 
+    /**
+     * @param array{id: int, name: string} $category
+     */
     static function fromArray(array $category): self
     {
         return new self(

@@ -12,10 +12,12 @@ use App\Repository\RepositoryAbstract;
 final class RecordRepository extends RepositoryAbstract
 {
     /**
+     * @return RecordEntity|null
      */
     function findByID(string $id): ?RecordEntity
     {
         $sql = 'SELECT * FROM records WHERE id = {id}';
+        /** @var array{id: string, category_id: int, body: string|null, short_body: string|null, seo_title: string|null, created_at_ms: int}|array{} $record */
         $record = $this->connect->exec($sql, ['id' => $id], 1);
         return $record ? RecordEntity::fromArray($record) : null;
     }
@@ -33,6 +35,7 @@ final class RecordRepository extends RepositoryAbstract
             ORDER BY created_at_ms DESC
             LIMIT {offset},{limit}';
 
+        /** @var array<array{id: string, category_id: int, body: string|null, short_body: string|null, seo_title: string|null, created_at_ms: int}> $records */
         $records = $this->connect->exec($sql, [
             'limit'      => $limit,
             'offset'     => $offset,

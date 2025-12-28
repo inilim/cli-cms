@@ -24,6 +24,9 @@ final class RecordEntity
         protected(set) int $createdAtMs,
     ) {}
 
+    /**
+     * @param array{id: string, category_id: int, body: string|null, short_body: string|null, seo_title: string|null, created_at_ms: int} $record
+     */
     static function fromArray(array $record): self
     {
         return new self(

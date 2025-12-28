@@ -28,12 +28,18 @@ final class TwigRenderService
         );
     }
 
+    /**
+     * @param array<mixed> $context
+     */
     function render(string $name, array $context = []): string
     {
         $name = Str::finish($name, '.twig');
         return $this->twig->render($name, $context);
     }
 
+    /**
+     * @param array<mixed> $context
+     */
     function show(string $name, array $context = []): void
     {
         echo $this->render($name, $context);

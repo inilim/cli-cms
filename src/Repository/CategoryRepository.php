@@ -12,13 +12,15 @@ use App\Repository\RepositoryAbstract;
 final class CategoryRepository extends RepositoryAbstract
 {
     /**
+     * @return CategoryEntity|null
      */
     function findByID(int $id): ?CategoryEntity
     {
         Assert::positiveInteger($id);
 
         $sql = 'SELECT * FROM categories WHERE id = {id}';
-        $catagory = $this->connect->exec($sql, ['id' => $id], 1);
-        return $catagory ? CategoryEntity::fromArray($catagory) : null;
+        /** @var array{id: int, name: string}|array{} $category */
+        $category = $this->connect->exec($sql, ['id' => $id], 1);
+        return $category ? CategoryEntity::fromArray($category) : null;
     }
 }
