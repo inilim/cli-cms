@@ -26,7 +26,7 @@ foreach ($output as $idx => $line) {
         continue;
     }
     if (\str_contains($line, 'undefined static method Inilim\\Tool\\')) {
-        // unset($output[$idx]);
+        unset($output[$idx]);
         // VD::de($line);
         $errorSkip++;
         continue;
