@@ -12,6 +12,13 @@
         "inilim/di": "dev-main",
         "twig/twig": "^3.22"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "phpstan/phpstan": "^2.1",
+        "symfony/process": "^5.4",
+        "symfony/finder": "^5.4",
+        "mikey179/vfsstream": "^1.6"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {

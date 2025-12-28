@@ -30,6 +30,11 @@
 - Добавлена сущность RecordEntity для представления записей из репозитория RecordRepository
 - Добавлены сущности CategoryEntity и RecordWithCategoryEntity
 - Добавлены специфичные функции для SQLite (CRC_32, UNIX_MS) через FillFnForDbService
+- Добавлены шаблоны для различных типов блоков (header_block, paragraph_block, quote_block, code_block, list_block, raw_block, default_block)
+- Добавлены CSS-стили в виде Twig-шаблонов (normalize_css, main_page_styles)
+- Добавлены примеры использования (example-main-page.php, example-twig.php)
+- Добавлены SQL-скрипты для создания таблиц (table_categories.sql, table_records.sql)
+- Добавлен пример структурированного контента в формате Editor.js (record_body.json)
 
 ## Next Steps
 - Реализовать дополнительные контроллеры для различных страниц

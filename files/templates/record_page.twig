@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ record.seo_title|default('CLI-CMS - Запись') }}</title>
+    <meta charset="UTF-8">
+    <style>{% include 'styles/normalize_css.twig' %}</style>
+    <style>{% include 'styles/record_page.twig' %}</style>
+</head>
+<body>
+    <article class="record-page">
+        <header class="record-header">
+            <h1 class="record-title">{{ record.seo_title|default('Заголовок отсутствует') }}</h1>
+            <div class="record-meta">
+                ID: {{ record.id }} | Создано: {{ record.created_at_ms|date('d.m.Y H:i:s') }}
+            </div>
+        </header>
+        <div class="record-content" data-id="record-{{ record.id }}">
+            {% if record.blocks %}
+                {% for block in record.blocks %}
+                    <div class="block block-{{ block.type }}" data-id="block-{{ block.id }}">
+                        {% include block.template ~ '.twig' with block.data %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Контент для этой записи отсутствует.</p>
+            {% endif %}
+        </div>
+    </article>
+</body>
+</html>
