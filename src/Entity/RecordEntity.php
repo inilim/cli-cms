@@ -10,13 +10,17 @@ final class RecordEntity
     /**
      * @param string $id Уникальный идентификатор записи (UUIDv7)
      * @param int $categoryId Идентификатор категории, к которой принадлежит запись
-     * @param string $body Тело записи в формате JSON
+     * @param string|null $body Тело записи в формате JSON
+     * @param string|null $shortBody Краткое содержимое для отображения на главной странице
+     * @param string|null $seoTitle Заголовок для тега title (SEO заголовок)
      * @param int $createdAtMs Время создания записи в миллисекундах (Unix timestamp)
      */
     function __construct(
         protected(set) string $id,
         protected(set) int $categoryId,
-        protected(set) string $body,
+        protected(set) ?string $body,
+        protected(set) ?string $shortBody,
+        protected(set) ?string $seoTitle,
         protected(set) int $createdAtMs,
     ) {}
 
@@ -25,7 +29,9 @@ final class RecordEntity
         return new self(
             $record['id'],
             $record['category_id'],
-            $record['body'],
+            $record['body'] ?? null,
+            $record['short_body'] ?? null,
+            $record['seo_title'] ?? null,
             $record['created_at_ms']
         );
     }

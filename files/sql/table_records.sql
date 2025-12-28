@@ -6,6 +6,10 @@ CREATE TABLE records (
     category_id   INTEGER REFERENCES categories (id) ON UPDATE SET NULL,
     -- JSON
     body          TEXT    COLLATE NOCASE,
+    -- Short content for main page
+    short_body    TEXT    COLLATE NOCASE,
+    -- SEO title for <title> tag
+    seo_title     TEXT    COLLATE NOCASE,
     -- example value 1766711695970
     created_at_ms INTEGER NOT NULL
 );
