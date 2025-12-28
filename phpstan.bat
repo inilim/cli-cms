@@ -1,1 +1,1 @@
-php84 vendor/bin/phpstan analyze
+php84 ./tools/phpstan.php

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Exception\AppException;
 use Inilim\Tool\Time;
 use Inilim\IPDO\IPDOSQLite;
 
@@ -11,13 +12,18 @@ abstract class RepositoryAbstract
 
     function __construct()
     {
-        $this->connect = \DITag('db');
+        $connect = \DITag('db');
+        if ($connect === null) {
+            throw new AppException('Database connection is not available');
+        }
+        $this->connect = $connect;
     }
 
     protected function execExists(string $sql, array $values = []): bool
     {
         $sql = \sprintf('SELECT exists (%s) as ex', $sql);
-        $exists = $this->connect->exec($sql, $values, 1)['ex'] ?? '0';
+        $result = $this->connect->exec($sql, $values, 1);
+        $exists = $result['ex'] ?? '0';
         return $exists == '1' ? true : false;
     }
 }

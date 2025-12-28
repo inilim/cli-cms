@@ -13,7 +13,7 @@ use App\Repository\RecordRepository;
  */
 final class RecordPageController extends \App\Controller\ControllerAbstract
 {
-    function __invoke(string $recordId)
+    function __invoke(string $recordId): void
     {
         // Получаем зависимости через DI-контейнер
         $recordRepository  = \DI(RecordRepository::class);
@@ -24,11 +24,11 @@ final class RecordPageController extends \App\Controller\ControllerAbstract
         $record = $recordRepository->findByID($recordId);
 
         if (!$record) {
-            throw new AppException(\sprintf('Record id "%s" nor found'));
+            throw new AppException(\sprintf('Record id "%s" not found', $recordId));
         }
 
         // Обрабатываем запись, преобразуя JSON-тело в структурированные данные
-        $processedBlocks = $blockProcessingService->processBody($record->body);
+        $processedBlocks = $blockProcessingService->processBody($record->body ?? '');
         $processedRecord = [
             'id'            => $record->id,
             'category_id'   => $record->categoryId,

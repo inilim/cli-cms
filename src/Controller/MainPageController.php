@@ -11,7 +11,7 @@ use App\Repository\RecordRepository;
  */
 final class MainPageController extends \App\Controller\ControllerAbstract
 {
-    function __invoke()
+    function __invoke(): void
     {
         // Получаем зависимости через DI-контейнер
         $recordRepository  = \DI(RecordRepository::class);
@@ -24,7 +24,7 @@ final class MainPageController extends \App\Controller\ControllerAbstract
         // Обрабатываем каждую запись, преобразуя JSON-тело в структурированные данные
         $processedRecords = [];
         foreach ($records as $record) {
-            $processedBlocks = $blockProcessingService->processBody($record->shortBody);
+            $processedBlocks = $blockProcessingService->processBody($record->shortBody ?? '');
             $processedRecords[] = [
                 'id'            => $record->id,
                 'category_id'   => $record->categoryId,

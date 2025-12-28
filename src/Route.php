@@ -4,8 +4,8 @@ namespace App;
 
 final class Route
 {
-    function __invoke()
+    function __invoke(): void
     {
-        // 
+        //
     }
 }
