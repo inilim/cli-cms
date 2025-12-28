@@ -8,12 +8,6 @@
 </head>
 <body>
     <article class="record-page">
-        <header class="record-header">
-            <h1 class="record-title">{{ record.seo_title|default('Заголовок отсутствует') }}</h1>
-            <div class="record-meta">
-                ID: {{ record.id }} | Создано: {{ record.created_at_ms|date('d.m.Y H:i:s') }}
-            </div>
-        </header>
         <div class="record-content" data-id="record-{{ record.id }}">
             {% if record.blocks %}
                 {% for block in record.blocks %}
