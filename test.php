@@ -11,7 +11,6 @@ require_once __DIR__ . '/boot.php';
 
 $_SERVER;
 
-$h = Exp::normalizeHeaders();
 $request = [
     'path'    => '',
     'details' => [
