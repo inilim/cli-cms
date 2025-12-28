@@ -1,0 +1,1 @@
+php84 vendor/bin/phpstan analyze
