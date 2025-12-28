@@ -10,7 +10,7 @@
 - База данных: SQLite (files/db/base.sqlite)
 - Логирование: в файл files/logs.log
 - Шаблонизация: Twig через TwigRenderService (шаблоны в files/templates)
-- Контроллеры: MainPageController и ControllerAbstract
+- Контроллеры: MainPageController, RecordPageController и ControllerAbstract
 - Репозитории: CategoryRepository и RecordRepository
 - Сервисы: FillFnForDbService, TwigRenderService и BlockProcessingService
 - Сущности: RecordEntity, CategoryEntity, RecordWithCategoryEntity
@@ -31,10 +31,11 @@
 - Добавлены сущности CategoryEntity и RecordWithCategoryEntity
 - Добавлены специфичные функции для SQLite (CRC_32, UNIX_MS) через FillFnForDbService
 - Добавлены шаблоны для различных типов блоков (header_block, paragraph_block, quote_block, code_block, list_block, raw_block, default_block)
-- Добавлены CSS-стили в виде Twig-шаблонов (normalize_css, main_page_styles)
+- Добавлены CSS-стили виде Twig-шаблонов (normalize_css, main_page_styles)
 - Добавлены примеры использования (example-main-page.php, example-twig.php)
 - Добавлены SQL-скрипты для создания таблиц (table_categories.sql, table_records.sql)
 - Добавлен пример структурированного контента в формате Editor.js (record_body.json)
+- Добавлен контроллер RecordPageController для отображения отдельной страницы записи
 
 ## Next Steps
 - Реализовать дополнительные контроллеры для различных страниц

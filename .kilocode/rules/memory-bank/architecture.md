@@ -123,3 +123,4 @@ index.php → boot.php → DI Container → Bindings → Controllers/Repositorie
 - Обработка контента: `BlockProcessingService` → `MainPageController` → `TwigRenderService` → шаблоны в `files/templates/blocks/`
 - Пример использования: `example-main-page.php` → `MainPageController` → отображение записей с обработанными блоками
 - Пример шаблонизации: `example-twig.php` → `TwigRenderService` → рендеринг шаблонов в CLI
+- Отображение отдельной записи: `RecordPageController` → `RecordRepository` → `BlockProcessingService` → `TwigRenderService` → `files/templates/record_page.twig`
