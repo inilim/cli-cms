@@ -26,15 +26,10 @@ final class MainPageController extends \App\Controller\ControllerAbstract
         // Обрабатываем каждую запись, преобразуя JSON-тело в структурированные данные
         $processedRecords = [];
         foreach ($recordsWithCategory as $recordWithCategory) {
-            $record = $recordWithCategory->record;
-            $category = $recordWithCategory->category;
-            
-            $processedBlocks = $blockProcessingService->processBody($record->shortBody ?? '');
+            $processedBlocks = $blockProcessingService->processBody($recordWithCategory->record->shortBody);
             $processedRecords[] = [
-                'id'            => $record->id,
-                'category'      => $category,
-                'blocks'        => $processedBlocks,
-                'created_at_ms' => $record->createdAtMs
+                'recordWithCategory' => $recordWithCategory,
+                'blocks'             => $processedBlocks
             ];
         }
 

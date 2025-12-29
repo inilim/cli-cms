@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Exception\AppException;
+use Inilim\Tool\Exp;
+use Inilim\Tool\Json;
+
 /**
  * Сервис для обработки блоков контента из JSON-тела записи
  *
@@ -62,19 +66,28 @@ final class BlockProcessingService
     /**
      * Обрабатывает тело записи (в формате JSON), извлекая и обрабатывая блоки
      *
-     * @param string $body JSON-строка с содержимым записи
+     * @param ?string $body JSON-строка с содержимым записи
      * @return ProcessedBlock[] Обработанные блоки или пустой массив в случае ошибки
      */
-    function processBody(string $body): array
+    function processBody(?string $body): array
     {
-        $decodedBody = \json_decode($body, true);
-
-        if (!\is_array($decodedBody) || !\is_array($decodedBody['blocks'] ?? null)) {
+        if ($body === null || $body === '') {
             return [];
+        }
+
+        $decodedBody = Json::tryDecodeAsArray($body);
+
+        if ($decodedBody === null) {
+            throw new AppException(\sprintf('Failed to decode JSON body: %s', $body));
+        }
+
+        if (!\is_array($decodedBody['blocks'] ?? null)) {
+            throw new AppException(\sprintf('JSON body does not contain valid blocks array: %s', $body));
         }
 
         /** @var array<array{id: string, type: string, data: array<string, mixed>}> $blocks */
         $blocks = $decodedBody['blocks'];
+        unset($decodedBody);
 
         return $this->processBlocks($blocks);
     }

@@ -12,10 +12,10 @@
     
     {% if records %}
         {% for record in records %}
-            <div class="record" data-id="record-{{ record.id }}">
-                {% if record.category %}
+            <div class="record" data-id="record-{{ record.recordWithCategory.record.id }}">
+                {% if record.recordWithCategory.category %}
                     <div class="record-category">
-                        <span class="category-name">{{ record.category.name }}</span>
+                        <span class="category-name">{{ record.recordWithCategory.category.name }}</span>
                     </div>
                 {% endif %}
                 
