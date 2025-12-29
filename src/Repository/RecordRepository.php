@@ -67,9 +67,8 @@ final class RecordRepository extends RepositoryAbstract
             'offset'     => $offset,
         ], 2);
 
-        $result = [];
         if (!$records) {
-            return $result;
+            return [];
         }
 
         // Собираем все ID категорий
@@ -98,6 +97,7 @@ final class RecordRepository extends RepositoryAbstract
         }
         unset($categoryIds);
 
+        $result = [];
         // Связываем записи с категориями
         foreach ($records as $idx => $record) {
             $categoryId = $record['category_id'];
