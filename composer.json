@@ -5,6 +5,12 @@
         },
         "files": []
     },
+    "autoload-dev": {
+        "psr-4": {
+            "AppTest\\": "tests/"
+        },
+        "files": []
+    },
     "require": {
         "inilim/tools": "dev-main",
         "inilim/ipdo": "dev-main",
