@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // файл для проверок процедур
 
 use Inilim\Tool\VD;
@@ -30,6 +32,6 @@ $request = [
 
 // path string
 // details array
-// body 
+// body
 
 VD::de($res);

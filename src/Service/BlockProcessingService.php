@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 /**
  * Сервис для обработки блоков контента из JSON-тела записи
- * 
+ *
  * @psalm-type Block = array{id:string,type:string,data:array<string, mixed>}
  * @psalm-type ProcessedBlock = array{id:string,type:string,data:array<string,mixed>,template:string}
  */

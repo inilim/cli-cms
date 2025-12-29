@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Inilim\Tool\VD;
 
 // Пример использования Twig в CLI-CMS

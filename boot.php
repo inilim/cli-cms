@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Bind\Main;
 use Inilim\DI\Bind;
 use Inilim\Env\Env;
