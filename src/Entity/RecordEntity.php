@@ -11,7 +11,7 @@ final class RecordEntity
 {
     /**
      * @param string $id Уникальный идентификатор записи (UUIDv7)
-     * @param int $categoryId Идентификатор категории, к которой принадлежит запись
+     * @param ?int $categoryId Идентификатор категории, к которой принадлежит запись
      * @param string|null $body Тело записи в формате JSON
      * @param string|null $shortBody Краткое содержимое для отображения на главной странице
      * @param string|null $seoTitle Заголовок для тега title (SEO заголовок)
@@ -19,7 +19,7 @@ final class RecordEntity
      */
     function __construct(
         protected(set) string $id,
-        protected(set) int $categoryId,
+        protected(set) ?int $categoryId,
         protected(set) ?string $body,
         protected(set) ?string $shortBody,
         protected(set) ?string $seoTitle,
