@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <style>{% include 'styles/normalize_css.twig' %}</style>
     <style>{% include 'styles/main_page_styles.twig' %}</style>
+    <style>{% include 'styles/menu_styles.twig' %}</style>
 </head>
 <body>
+    {% include 'components/menu.twig' %}
+    
     {% if records %}
         {% for record in records %}
             <div class="record" data-id="record-{{ record.id }}">

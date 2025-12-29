@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <style>{% include 'styles/normalize_css.twig' %}</style>
     <style>{% include 'styles/record_page.twig' %}</style>
+    <style>{% include 'styles/menu_styles.twig' %}</style>
 </head>
 <body>
+    {% include 'components/menu.twig' %}
+    
     <article class="record-page">
         <div class="record-content" data-id="record-{{ record.id }}">
             {% if record.blocks %}
