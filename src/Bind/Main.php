@@ -18,6 +18,10 @@ final class Main
     {
         $bind = Bind::self();
 
+        $config = new Env;
+        $config->loadFromFile(\ROOT . '/config.php');
+        $bind->singletonTag('config', $config);
+
         $bind->singletonTag('db', static function ($di) {
             $config = $di->DITag('config');
             /** @var Env $config */
