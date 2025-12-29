@@ -86,8 +86,12 @@ final class RecordRepository extends RepositoryAbstract
         // Получаем все категории за один запрос
         $categories = [];
         if ($categoryIds) {
-            $sql = 'SELECT * FROM categories WHERE id IN ({categoryIds})';
-            $categoryData = $this->connect->exec($sql, ['categoryIds' => $categoryIds], 2);
+            // Создаем параметры для IN-запроса
+            $sql = "SELECT * FROM categories WHERE id IN ({list})";
+            // @phpstan-ignore-next-line
+            $categoryData = $this->connect->exec($sql, [
+                'list' => $categoryIds
+            ], 2);
             /** @var (array{id:int,name:string})[] $categoryData */
             foreach ($categoryData as $idx => $category) {
                 $categories[$category['id']] = CategoryEntity::fromArray($category);

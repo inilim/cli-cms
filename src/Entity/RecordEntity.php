@@ -27,7 +27,7 @@ final class RecordEntity
     ) {}
 
     /**
-     * @param array{id: string, category_id: int, body: string|null, short_body: string|null, seo_title: string|null, created_at_ms: int} $record
+     * @param array{id: string, category_id: int|null, body: string|null, short_body: string|null, seo_title: string|null, created_at_ms: int} $record
      */
     static function fromArray(array $record): self
     {
