@@ -89,15 +89,11 @@ final class RecordRepository extends RepositoryAbstract
             // Создаем параметры для IN-запроса
             $sql = "SELECT * FROM categories WHERE id IN ({list})";
             // @phpstan-ignore-next-line
-            $categoryData = $this->connect->exec($sql, [
+            $categories = $this->connect->exec($sql, [
                 'list' => $categoryIds
             ], 2);
-            /** @var (array{id:int,name:string})[] $categoryData */
-            foreach ($categoryData as $idx => $category) {
-                $categories[$category['id']] = CategoryEntity::fromArray($category);
-                unset($categoryData[$idx]);
-            }
-            unset($categoryData);
+            /** @var (array{id:int,name:string})[] $categories */
+            $categories = \array_column($categories, null, 'id');
         }
         unset($categoryIds);
 
@@ -106,9 +102,10 @@ final class RecordRepository extends RepositoryAbstract
         foreach ($records as $idx => $record) {
             $categoryId = $record['category_id'];
             $category = $categories[$categoryId ?? -1] ?? null;
+            /** @var array{id:int,name:string}|null $category */
             $result[] = RecordWithCategoryEntity::from(
                 RecordEntity::fromArray($record),
-                $category
+                $category ? CategoryEntity::fromArray($category) : null
             );
             unset($records[$idx]);
         }
