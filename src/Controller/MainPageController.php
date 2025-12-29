@@ -20,16 +20,19 @@ final class MainPageController extends \App\Controller\ControllerAbstract
         $twigRenderService = \DI(TwigRenderService::class);
         $blockProcessingService = \DI(BlockProcessingService::class);
 
-        // Получаем записи для главной страницы как сущности
-        $records = $recordRepository->getForMainPage();
+        // Получаем записи для главной страницы вместе с категориями
+        $recordsWithCategory = $recordRepository->getForMainPageWithCategory();
 
         // Обрабатываем каждую запись, преобразуя JSON-тело в структурированные данные
         $processedRecords = [];
-        foreach ($records as $record) {
+        foreach ($recordsWithCategory as $recordWithCategory) {
+            $record = $recordWithCategory->record;
+            $category = $recordWithCategory->category;
+            
             $processedBlocks = $blockProcessingService->processBody($record->shortBody ?? '');
             $processedRecords[] = [
                 'id'            => $record->id,
-                'category_id'   => $record->categoryId,
+                'category'      => $category,
                 'blocks'        => $processedBlocks,
                 'created_at_ms' => $record->createdAtMs
             ];

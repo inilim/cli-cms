@@ -1,1 +1,1 @@
-php84 ./tools/phpstan.php
+php84 ./cli-tools/phpstan.php

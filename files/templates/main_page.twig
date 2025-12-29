@@ -13,6 +13,12 @@
     {% if records %}
         {% for record in records %}
             <div class="record" data-id="record-{{ record.id }}">
+                {% if record.category %}
+                    <div class="record-category">
+                        <span class="category-name">{{ record.category.name }}</span>
+                    </div>
+                {% endif %}
+                
                 {% for block in record.blocks %}
                     <div class="block block-{{ block.type }}" data-id="block-{{ block.id }}">
                         {% include block.template ~ '.twig' with block.data %}

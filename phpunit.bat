@@ -1,1 +1,1 @@
-php84 ./tools/phpunit.php
+php84 ./cli-tools/phpunit.php
