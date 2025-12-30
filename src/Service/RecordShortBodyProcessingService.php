@@ -8,9 +8,9 @@ use App\Entity\RecordEntity;
 use App\Service\BlockProcessingService;
 
 /**
- * Сервис для обработки коротких блоков в записях
+ * Сервис для обработки short_body записей
  */
-final class RecordBlockProcessingService
+final class RecordShortBodyProcessingService
 {
     /**
      * Обрабатывает массив записей, преобразуя JSON-тело в структурированные данные

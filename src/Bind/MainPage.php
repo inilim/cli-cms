@@ -16,7 +16,7 @@ final class MainPage
         $bind = Bind::self();
 
         $bind->singletonList([
-            \App\Service\RecordBlockProcessingService::class,
+            \App\Service\RecordShortBodyProcessingService::class,
         ]);
     }
 }
