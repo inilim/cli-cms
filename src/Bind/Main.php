@@ -37,6 +37,7 @@ final class Main
         })
             ->singletonList([
                 \App\Service\TwigRenderService::class,
+                \App\Service\BlockProcessingService::class,
             ]);
     }
 }

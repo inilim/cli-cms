@@ -8,6 +8,7 @@ use Inilim\Tool\VD;
 use App\Service\BlockProcessingService;
 use App\Service\TwigRenderService;
 use App\Repository\RecordRepository;
+use App\Service\RecordBlockProcessingService;
 
 /**
  */
@@ -18,19 +19,13 @@ final class MainPageController extends \App\Controller\ControllerAbstract
         // Получаем зависимости через DI-контейнер
         $recordRepository  = \DI(RecordRepository::class);
         $twigRenderService = \DI(TwigRenderService::class);
-        $blockProcessingService = \DI(BlockProcessingService::class);
+        $recordBlockProcessingService = \DI(RecordBlockProcessingService::class);
 
         // Получаем записи для главной страницы вместе с категориями
         $records = $recordRepository->getForMainPageWithCategory();
 
-        // Обрабатываем каждую запись, преобразуя JSON-тело в структурированные данные
-        foreach ($records as $record) {
-            $record->setProp(
-                'blocks',
-                $blockProcessingService->processBody($record->short_body)
-            );
-            $record->removeProps(['short_body', 'body']);
-        }
+        // Обрабатываем записи, преобразуя JSON-тело в структурированные данные
+        $records = $recordBlockProcessingService->processRecords($records);
 
         // Рендерим главную страницу
         $twigRenderService->show('main_page', [
