@@ -131,3 +131,4 @@ index.php → boot.php → DI Container → Bindings → Controllers/Repositorie
 - Отображение отдельной записи: `RecordPageController` → `RecordRepository` → `BlockProcessingService` → `TwigRenderService` → `files/templates/record_page.twig`
 - Работа с динамическими сущностями: `DynamicEntityAbstract` → `RecordEntity`/`CategoryEntity` → `Repository` → база данных
 - Обработка связей между сущностями: `RecordRepository` → получение записей с категориями за один запрос → связывание записей с категориями
+- Оптимизация использования DI: сервисы могут использовать сквозной вызов \DI() без необходимости внедрения зависимостей через конструктор - `RecordBlockProcessingService` → вызов \DI(BlockProcessingService::class) напрямую
