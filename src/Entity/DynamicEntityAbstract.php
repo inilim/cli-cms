@@ -77,6 +77,7 @@ abstract class DynamicEntityAbstract
     }
 
     /**
+     * @param array<array<string, mixed>> $entities
      * @return static[]
      */
     static function fromArrayAll(array &$entities): array
@@ -100,6 +101,7 @@ abstract class DynamicEntityAbstract
 
         $results = [];
         foreach ($entities as $entity) {
+            /** @phpstan-ignore-next-line */
             $new = new static;
             $ss = [];
             foreach (LarArr::only($entity, $names) as $name => $value) {
@@ -116,6 +118,10 @@ abstract class DynamicEntityAbstract
         return $results;
     }
 
+    /**
+     * @param array<string, mixed> $entity
+     * @return static
+     */
     static function fromArray(array $entity): static
     {
         $arr = [$entity];
