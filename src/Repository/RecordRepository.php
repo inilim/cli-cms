@@ -9,7 +9,6 @@ use Inilim\Tool\Assert;
 use App\Entity\RecordEntity;
 use App\Entity\CategoryEntity;
 use App\Repository\RepositoryAbstract;
-use App\Entity\RecordWithCategoryEntity;
 
 /**
  */
@@ -45,11 +44,11 @@ final class RecordRepository extends RepositoryAbstract
             'offset'     => $offset,
         ], 2);
 
-        return \array_map(RecordEntity::fromArray(...), $records);
+        return RecordEntity::fromArrayAll($records);
     }
 
     /**
-     * @return \App\Entity\RecordWithCategoryEntity[]
+     * @return RecordEntity[]
      */
     function getForMainPageWithCategory(int $limit = 10, int $offset = 0): array
     {
@@ -97,19 +96,17 @@ final class RecordRepository extends RepositoryAbstract
         }
         unset($categoryIds);
 
-        $result = [];
         // Связываем записи с категориями
-        foreach ($records as $idx => $record) {
-            $categoryId = $record['category_id'];
+        $records = RecordEntity::fromArrayAll($records);
+        foreach ($records as $record) {
+            $categoryId = $record->category_id;
             $category = $categories[$categoryId ?? -1] ?? null;
             /** @var array{id:int,name:string}|null $category */
-            $result[] = RecordWithCategoryEntity::from(
-                RecordEntity::fromArray($record),
-                $category ? CategoryEntity::fromArray($category) : null
-            );
-            unset($records[$idx]);
+            if ($category) {
+                $record->setCategory(CategoryEntity::fromArray($category));
+            }
         }
 
-        return $result;
+        return $records;
     }
 }

@@ -13,7 +13,7 @@
 - Контроллеры: MainPageController, RecordPageController и ControllerAbstract
 - Репозитории: CategoryRepository и RecordRepository
 - Сервисы: FillFnForDbService, TwigRenderService и BlockProcessingService
-- Сущности: RecordEntity, CategoryEntity, RecordWithCategoryEntity
+- Сущности: RecordEntity, CategoryEntity
 
 ## Recent Analysis
 - Изучена структура проекта и основные файлы
@@ -28,7 +28,7 @@
 - Добавлены шаблоны для различных типов блоков контента (заголовки, параграфы, цитаты и др.)
 - Реализована система маршрутизации (Route.php)
 - Добавлена сущность RecordEntity для представления записей из репозитория RecordRepository
-- Добавлены сущности CategoryEntity и RecordWithCategoryEntity
+- Добавлены сущности CategoryEntity и обновленная версия RecordEntity
 - Добавлены специфичные функции для SQLite (CRC_32, UNIX_MS) через FillFnForDbService
 - Добавлены шаблоны для различных типов блоков (header_block, paragraph_block, quote_block, code_block, list_block, raw_block, default_block)
 - Добавлены CSS-стили виде Twig-шаблонов (normalize_css, main_page_styles)

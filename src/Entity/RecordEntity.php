@@ -4,40 +4,34 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Attribute\AdditionallyAttr;
+
 /**
  * Сущность для представления записи из репозитория RecordRepository
  */
-final class RecordEntity
+final class RecordEntity extends \App\Entity\DynamicEntityAbstract
 {
-    /**
-     * @param string $id Уникальный идентификатор записи (UUIDv7)
-     * @param ?int $categoryId Идентификатор категории, к которой принадлежит запись
-     * @param string|null $body Тело записи в формате JSON
-     * @param string|null $shortBody Краткое содержимое для отображения на главной странице
-     * @param string|null $seoTitle Заголовок для тега title (SEO заголовок)
-     * @param int $createdAtMs Время создания записи в миллисекундах (Unix timestamp)
-     */
-    function __construct(
-        protected(set) string $id,
-        protected(set) ?int $categoryId,
-        protected(set) ?string $body,
-        protected(set) ?string $shortBody,
-        protected(set) ?string $seoTitle,
-        protected(set) int $createdAtMs,
-    ) {}
+    protected(set) ?string $id = null;
+    protected(set) ?int $category_id = null;
+    protected(set) ?string $body = null;
+    protected(set) ?string $short_body = null;
+    protected(set) ?string $seo_title = null;
+    protected(set) ?int $created_at_ms = null;
 
-    /**
-     * @param array{id: string, category_id: int|null, body: string|null, short_body: string|null, seo_title: string|null, created_at_ms: int} $record
-     */
-    static function fromArray(array $record): self
+    #[AdditionallyAttr]
+    protected(set) ?CategoryEntity $category = null;
+
+    function setCategory(CategoryEntity $category): self
     {
-        return new self(
-            $record['id'],
-            $record['category_id'],
-            $record['body'] ?? null,
-            $record['short_body'] ?? null,
-            $record['seo_title'] ?? null,
-            $record['created_at_ms']
-        );
+        if ($this->category_id === null) {
+            throw new \InvalidArgumentException(\sprintf('Cannot set category for record with null category_id'));
+        }
+
+        if ($category->id !== $this->category_id) {
+            throw new \InvalidArgumentException(\sprintf('Category ID mismatch: expected %s, got %s', $this->category_id, $category->id));
+        }
+        $this->setProp('category', $category);
+
+        return $this;
     }
 }

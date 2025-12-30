@@ -6,11 +6,16 @@ declare(strict_types=1);
 
 use Inilim\Tool\VD;
 use Inilim\Tool\Exp;
+use App\Entity\RecordEntity;
 use App\Repository\RecordRepository;
 
 require_once __DIR__ . '/boot.php';
 
 
+
+$a = RecordEntity::fromArray(['id' => 'dawd', 'dawd' => 'awdw']);
+
+VD::de($a);
 $_SERVER;
 
 $request = [

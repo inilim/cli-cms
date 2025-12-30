@@ -29,14 +29,23 @@ final class RecordPageController extends \App\Controller\ControllerAbstract
             throw new AppException(\sprintf('Record id "%s" not found', $recordId));
         }
 
+        // Если у записи есть категория, получаем её
+        if ($record->category_id !== null) {
+            $category = \DI(\App\Repository\CategoryRepository::class)->findByID($record->category_id);
+            if ($category) {
+                $record->setCategory($category);
+            }
+        }
+
         // Обрабатываем запись, преобразуя JSON-тело в структурированные данные
         $processedBlocks = $blockProcessingService->processBody($record->body ?? '');
         $processedRecord = [
             'id'            => $record->id,
-            'category_id'   => $record->categoryId,
-            'seo_title'      => $record->seoTitle,
+            'category_id'   => $record->category_id,
+            'category'      => $record->category,
+            'seo_title'     => $record->seo_title,
             'blocks'        => $processedBlocks,
-            'created_at_ms' => $record->createdAtMs
+            'created_at_ms' => $record->created_at_ms
         ];
 
         // Рендерим страницу записи

@@ -34,9 +34,8 @@ CLI-CMS использует архитектурный подход, близк
 
 ### Entity Layer
 - `src/Entity/RecordEntity.php` - сущность для представления записи из репозитория RecordRepository
-- Содержит поля: id, categoryId, body, shortBody, seoTitle, createdAtMs с использованием модификатора `protected(set)`
+- Содержит поля: id, category_id, body, short_body, seo_title, created_at_ms с использованием модификатора `protected(set)`
 - `src/Entity/CategoryEntity.php` - сущность для представления категории из репозитория CategoryRepository
-- `src/Entity/RecordWithCategoryEntity.php` - сущность для представления записи вместе с её категорией
 
 ### Repository Pattern
 - `src/Repository/RepositoryAbstract.php` - абстрактный класс для репозиториев
