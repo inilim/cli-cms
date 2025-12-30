@@ -38,6 +38,7 @@ CLI-CMS использует архитектурный подход, близк
 - `src/Entity/CategoryEntity.php` - сущность для представления категории из репозитория CategoryRepository
 - `src/Entity/DynamicEntityAbstract.php` - абстрактный класс для динамических сущностей с поддержкой динамических свойств через атрибут #[\AllowDynamicProperties]
 - `src/Entity/Attribute/AdditionallyAttr.php` - атрибут для помечания свойств, которые дополняют сущность, но не являются основными свойствами
+- `src/Entity/RecordEntity.php` - сущность для представления записи из репозитория RecordRepository с поддержкой динамических свойств и связи с категорией
 
 ### Repository Pattern
 - `src/Repository/RepositoryAbstract.php` - абстрактный класс для репозиториев
@@ -108,6 +109,7 @@ CLI-CMS использует архитектурный подход, близк
 - Использование модификатора `protected(set)` для свойств сущностей
 - Поддержка пользовательских функций в базе данных (CRC_32, UNIX_MS)
 - Поддержка динамических свойств в сущностях через DynamicEntityAbstract
+- Использование атрибута AdditionallyAttr для пометки дополнительных свойств сущностей
 
 ## Component Relationships
 ```
@@ -128,3 +130,4 @@ index.php → boot.php → DI Container → Bindings → Controllers/Repositorie
 - Пример шаблонизации: `example-twig.php` → `TwigRenderService` → рендеринг шаблонов в CLI
 - Отображение отдельной записи: `RecordPageController` → `RecordRepository` → `BlockProcessingService` → `TwigRenderService` → `files/templates/record_page.twig`
 - Работа с динамическими сущностями: `DynamicEntityAbstract` → `RecordEntity`/`CategoryEntity` → `Repository` → база данных
+- Обработка связей между сущностями: `RecordRepository` → получение записей с категориями за один запрос → связывание записей с категориями
