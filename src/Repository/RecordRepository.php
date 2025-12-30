@@ -71,20 +71,19 @@ final class RecordRepository extends RepositoryAbstract
         }
 
         // Собираем все ID категорий
-        // Приводим все category_id к int и фильтруем
-        $categoryIds = Arr::mapFilter($records, static function (array $record): ?int {
+        $categoryIds = [];
+        foreach ($records as $record) {
             $id = $record['category_id'];
-            if ($id === null) {
-                return null;
+            if ($id !== null) {
+                $categoryIds[$id] = null;
             }
-            return $id;
-        });
-        /** @var int[] $categoryIds */
-        $categoryIds = Arr::unique($categoryIds);
+        }
 
         // Получаем все категории за один запрос
         $categories = [];
         if ($categoryIds) {
+            $categoryIds = \array_keys($categoryIds);
+            /** @var int[] $categoryIds */
             // Создаем параметры для IN-запроса
             $sql = "SELECT * FROM categories WHERE id IN ({list})";
             // @phpstan-ignore-next-line

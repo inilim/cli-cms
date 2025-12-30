@@ -36,6 +36,8 @@ CLI-CMS использует архитектурный подход, близк
 - `src/Entity/RecordEntity.php` - сущность для представления записи из репозитория RecordRepository
 - Содержит поля: id, category_id, body, short_body, seo_title, created_at_ms с использованием модификатора `protected(set)`
 - `src/Entity/CategoryEntity.php` - сущность для представления категории из репозитория CategoryRepository
+- `src/Entity/DynamicEntityAbstract.php` - абстрактный класс для динамических сущностей с поддержкой динамических свойств через атрибут #[\AllowDynamicProperties]
+- `src/Entity/Attribute/AdditionallyAttr.php` - атрибут для помечания свойств, которые дополняют сущность, но не являются основными свойствами
 
 ### Repository Pattern
 - `src/Repository/RepositoryAbstract.php` - абстрактный класс для репозиториев
@@ -63,8 +65,9 @@ CLI-CMS использует архитектурный подход, близк
 - `src/Bind/` - компоненты привязки (связывания зависимостей)
 - `src/Controller/` - контроллеры приложения
 - `src/Entity/` - сущности приложения
+- `src/Entity/Attribute/` - атрибуты для сущностей
 - `src/Enum/` - перечисления (пустая директория на данный момент)
-- `src/Exception/` - исключения (пустая директория на данный момент)
+- `src/Exception/` - исключения
 - `src/Repository/` - репозитории для работы с данными
 - `src/Service/` - сервисы приложения
 - `src/Service/TwigRenderService.php` - сервис для рендеринга Twig-шаблонов
@@ -104,6 +107,7 @@ CLI-CMS использует архитектурный подход, близк
 - Поддержка структурированного контента в формате Editor.js
 - Использование модификатора `protected(set)` для свойств сущностей
 - Поддержка пользовательских функций в базе данных (CRC_32, UNIX_MS)
+- Поддержка динамических свойств в сущностях через DynamicEntityAbstract
 
 ## Component Relationships
 ```
@@ -123,3 +127,4 @@ index.php → boot.php → DI Container → Bindings → Controllers/Repositorie
 - Пример использования: `example-main-page.php` → `MainPageController` → отображение записей с обработанными блоками
 - Пример шаблонизации: `example-twig.php` → `TwigRenderService` → рендеринг шаблонов в CLI
 - Отображение отдельной записи: `RecordPageController` → `RecordRepository` → `BlockProcessingService` → `TwigRenderService` → `files/templates/record_page.twig`
+- Работа с динамическими сущностями: `DynamicEntityAbstract` → `RecordEntity`/`CategoryEntity` → `Repository` → база данных

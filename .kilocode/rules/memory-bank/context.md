@@ -36,6 +36,15 @@
 - Добавлены SQL-скрипты для создания таблиц (table_categories.sql, table_records.sql)
 - Добавлен пример структурированного контента в формате Editor.js (record_body.json)
 - Добавлен контроллер RecordPageController для отображения отдельной страницы записи
+- Добавлены сущности CategoryEntity и обновленная версия RecordEntity
+- Добавлены специфичные функции для SQLite (CRC_32, UNIX_MS) через FillFnForDbService
+- Добавлены шаблоны для различных типов блоков (header_block, paragraph_block, quote_block, code_block, list_block, raw_block, default_block)
+- Добавлены CSS-стили виде Twig-шаблонов (normalize_css, main_page_styles)
+- Добавлены примеры использования (example-main-page.php, example-twig.php)
+- Добавлены SQL-скрипты для создания таблиц (table_categories.sql, table_records.sql)
+- Добавлен пример структурированного контента в формате Editor.js (record_body.json)
+- Добавлены новые файлы сущностей: DynamicEntityAbstract.php и AdditionallyAttr.php
+- Добавлен файл исключения AppException.php
 
 ## Next Steps
 - Реализовать дополнительные контроллеры для различных страниц
@@ -45,3 +54,5 @@
 - Реализовать функционал для добавления и редактирования записей
 - Улучшить систему логирования с более подробной информацией
 - Добавить тесты для основных компонентов системы
+- Обновить документацию для отражения новых возможностей динамических сущностей
+- Добавить примеры использования DynamicEntityAbstract и AdditionallyAttr

@@ -7,13 +7,13 @@ namespace App\Entity;
 use App\Entity\Attribute\AdditionallyAttr;
 use Inilim\Tool\VD;
 use Inilim\Tool\Arr;
-use Inilim\Tool\Refl;
 use Inilim\Tool\LarArr;
 use Inilim\Tool\Str;
 
 #[\AllowDynamicProperties]
 abstract class DynamicEntityAbstract
 {
+    private const _S = ',';
     /**
      */
     private string $__set_set_props = '';
@@ -21,26 +21,44 @@ abstract class DynamicEntityAbstract
     function hasProp(string $name): bool
     {
         return \str_contains(
-            Str::wrap($this->__set_set_props, ','),
-            Str::wrap($name, ',')
+            Str::wrap($this->__set_set_props, self::_S),
+            Str::wrap($name, self::_S)
         );
     }
 
     /**
      */
-    protected function setProp(string $name, mixed $value): static
+    function setProp(string $name, mixed $value): static
     {
         $this->$name = $value;
         return $this->setSetProp($name);
     }
 
+    /**
+     * @param string|string[] $names
+     */
+    function removeProps(string|array $names): static
+    {
+        if (\is_string($names)) {
+            $names = [$names];
+        }
+        foreach ($names as $name) {
+            if ($this->hasProp($name)) {
+                $this->$name = null;
+                $this->removeSetProp($name);
+            }
+        }
+        return $this;
+    }
+
     private function removeSetProp(string $name): static
     {
-        $t = $this->__set_set_props;
-        $t = Str::wrap($t, ',');
-        $name = Str::wrap($name, ',');
-        $t = \trim(\strtr($t, [$name => '']), ',');
-        $this->__set_set_props = $t;
+        $str = $this->__set_set_props;
+        $str = Str::wrap($str, self::_S);
+        $name = Str::wrap($name, self::_S);
+        $str = \strtr($str, [$name => '']);
+        $str = \trim($str, self::_S);
+        $this->__set_set_props = $str;
         return $this;
     }
 
@@ -51,7 +69,7 @@ abstract class DynamicEntityAbstract
             if ($str === '') {
                 $str = $name;
             } else {
-                $str .= ',' . $name;
+                $str .= self::_S . $name;
             }
             $this->__set_set_props = $str;
         }
@@ -59,19 +77,11 @@ abstract class DynamicEntityAbstract
     }
 
     /**
-     */
-    function removeProp(string $name): static
-    {
-        $this->$name = null;
-        return $this->removeSetProp($name);
-    }
-
-    /**
      * @return static[]
      */
-    static function fromArrayAll(array &$records): array
+    static function fromArrayAll(array &$entities): array
     {
-        if (!$records) {
+        if (!$entities) {
             return [];
         }
 
@@ -89,26 +99,26 @@ abstract class DynamicEntityAbstract
         /** @var string[] $names */
 
         $results = [];
-        foreach ($records as $record) {
+        foreach ($entities as $entity) {
             $new = new static;
             $ss = [];
-            foreach (LarArr::only($record, $names) as $name => $value) {
+            foreach (LarArr::only($entity, $names) as $name => $value) {
                 $new->$name = $value;
                 $ss[] = $name;
             }
             if (!$ss) {
-                throw new \InvalidArgumentException(\sprintf('No valid properties found in record for entity %s', static::class));
+                throw new \InvalidArgumentException(\sprintf('No valid properties found in array for entity %s', static::class));
             }
-            $new->__set_set_props = \implode(',', $ss);
+            $new->__set_set_props = \implode(self::_S, $ss);
             $results[] = $new;
         }
 
         return $results;
     }
 
-    static function fromArray(array $record): static
+    static function fromArray(array $entity): static
     {
-        $arr = [$record];
+        $arr = [$entity];
         return static::fromArrayAll($arr)[0];
     }
 }

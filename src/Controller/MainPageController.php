@@ -25,7 +25,11 @@ final class MainPageController extends \App\Controller\ControllerAbstract
 
         // Обрабатываем каждую запись, преобразуя JSON-тело в структурированные данные
         foreach ($records as $record) {
-            $record->blocks = $blockProcessingService->processBody($record->short_body);
+            $record->setProp(
+                'blocks',
+                $blockProcessingService->processBody($record->short_body)
+            );
+            $record->removeProps(['short_body', 'body']);
         }
 
         // Рендерим главную страницу
