@@ -1,0 +1,1 @@
+php84 ./cli-tools/php-syntax.php %*
