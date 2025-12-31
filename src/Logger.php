@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace App;
 
-use Inilim\Tool\File;
-use Inilim\Tool\Json;
+use Monolog\Logger as Monolog;
 
-class Logger
+final class Logger
 {
+    protected Monolog $monolog;
+
     function __construct(
         protected string $pathToFile
-    ) {}
+    ) {
+        $log = new Monolog('');
+        $stream = new \Monolog\Handler\StreamHandler($pathToFile);
+        $stream->setFormatter(new \Monolog\Formatter\JsonFormatter);
+        $log->pushHandler($stream);
+        $this->monolog = $log;
+    }
 
     function __invoke(mixed ...$values): void
     {
-        $values = ['values' => $values];
-        $values['trace'] = \debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS, 3);
-        $json = Json::tryEncode($values);
-        if ($json === null) {
-            $json = Json::tryEncode(\print_r($values, true), default: '[]');
-        }
-        File::put($this->pathToFile, $json . PHP_EOL, \FILE_APPEND);
+        $this->monolog->info('', $values);
     }
 }

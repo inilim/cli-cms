@@ -16,7 +16,8 @@
         "inilim/ipdo": "dev-main",
         "inilim/env": "dev-main",
         "inilim/di": "dev-main",
-        "twig/twig": "^3.22"
+        "twig/twig": "^3.22",
+        "monolog/monolog": "^3.9"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6",
