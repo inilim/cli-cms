@@ -22,6 +22,11 @@ final class Logger
 
     function __invoke(mixed ...$values): void
     {
-        $this->monolog->info('', $values);
+        $this->monolog->info('mixed', $values);
+    }
+
+    function error(mixed ...$values): void
+    {
+        $this->monolog->error('', $values);
     }
 }
